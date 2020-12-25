@@ -24,7 +24,7 @@ class LoginController extends Controller
             $email = $this->request->input('email');
             $senha = $this->request->input('password');
 
-            $result = Auth::getInstance()->login($email, $senha);
+            $result = $this->auth->login($email, $senha);
 
             if ($result) {
                 $this->redirect();
@@ -39,7 +39,7 @@ class LoginController extends Controller
     public function logout()
     {
         try {
-            $this->logoutUser();
+            $this->auth->logout();
             $this->redirect();
         } catch (\Exception $e) {
             $this->redirect('login', ['erro' => $e->getMessage()]);

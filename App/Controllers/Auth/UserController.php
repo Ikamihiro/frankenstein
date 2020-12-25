@@ -11,8 +11,5 @@ class UserController extends Controller
         $this->view('register');
     }
 
-    public function register()
-    {
-
-    }
+    public function register() {}
 }

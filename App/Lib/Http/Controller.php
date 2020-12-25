@@ -7,10 +7,12 @@ use App\Lib\Utils\Auth;
 class Controller
 {
     public $request;
+    public $auth;
 
     public function __construct()
     {
         $this->request = new Request();
+        $this->auth = Auth::getInstance();
     }
 
     public function redirect($routeName = null, array $params = array()): void
@@ -41,25 +43,5 @@ class Controller
     public function view($view, array $params = array())
     {
         View::getInstance()->render($view, $params);
-    }
-
-    public function lock()
-    {
-        Auth::getInstance()->lock();
-    }
-
-    public function onlyGuest()
-    {
-        Auth::getInstance()->onlyGuest();
-    }
-
-    public function authorize($role)
-    {
-        Auth::getInstance()->authorize($role);
-    }
-
-    public function logoutUser()
-    {
-        Auth::getInstance()->logout();
     }
 }

@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $this->lock();
+        $this->auth->lock();
         $this->view('home');
     }
 }
