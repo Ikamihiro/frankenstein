@@ -15,29 +15,25 @@ class Controller
         $this->auth = Auth::getInstance();
     }
 
-    public function redirect($routeName = null, array $params = array()): void
+    public function redirect($routeName = null, $params = array()): void
     {
-        ob_start();
+        if (!empty($params))
+        {
+            Session::init();
+            foreach ($params as $key => $value)
+            {
+                Session::set($key, $value);
+            }
+        }
 
         if (!is_null($routeName))
         {
-            if (!is_null($params))
-            {
-                Session::init();
-                foreach ($params as $key => $value)
-                {
-                    Session::set($key, $value);
-                }
-            }
-
-            header('Location: ' . URL_BASE . $routeName);
+            header('Location: ' . URL . $routeName);
         } else {
             // Se não for especificada, redireciona para
             // a rota raiz do sistema
-            header('Location:' . URL_BASE);
+            header('Location:' . URL);
         }
-
-        ob_flush();
     }
 
     public function view($view, array $params = array())

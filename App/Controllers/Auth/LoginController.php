@@ -3,14 +3,12 @@
 namespace App\Controllers\Auth;
 
 use App\Lib\Http\Controller;
-use App\Lib\Utils\Auth;
 
 class LoginController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->onlyGuest();
     }
 
     public function index()
@@ -29,10 +27,10 @@ class LoginController extends Controller
             if ($result) {
                 $this->redirect();
             } else {
-                $this->redirect('login', ['erro' => 'Suas credenciais estão erradas']);
+                $this->view('auth/login', ['erro' => 'Suas credenciais estão erradas']);
             }
         } catch (\Exception $e) {
-            $this->redirect('login', ['erro' => $e->getMessage()]);
+            $this->view('auth/login', ['erro' => $e->getMessage()]);
         }
     }
 

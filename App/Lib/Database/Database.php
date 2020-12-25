@@ -2,30 +2,31 @@
 
 namespace App\Lib\Database;
 
-use Envms\FluentPDO\Query;
+use Exception;
+use PDOStatement;
 
-class Database
+/**
+ * Class Database
+ * @package App\Lib\Database
+ */
+class Database implements DatabaseContract
 {
     private static $singleton;
-    public $pdo;
-    public $fluent;
+    public $databaseConnection;
+    public $sql;
 
+    /**
+     * Database constructor.
+     */
     public function __construct()
     {
-        $options = array(
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING
-        );
-
-        $dsn = getenv('DB_TYPE')
-            . ':host=' . getenv('DB_HOST')
-            . ';dbname=' . getenv('DB_NAME')
-            . ';charset=' . getenv('DB_CHARSET');
-
-        $this->pdo = new \PDO($dsn, getenv('DB_USER'), getenv('DB_PASS'), $options);
-        $this->fluent = new Query($this->pdo);
+        $this->databaseConnection = Connection::getInstance();
+        $this->sql = '';
     }
 
+    /**
+     * @return Database
+     */
     public static function getInstance(): Database
     {
         if (self::$singleton == null)
@@ -36,8 +37,127 @@ class Database
         return self::$singleton;
     }
 
+    /**
+     * @throws Exception
+     */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new Exception("Cannot unserialize a singleton.");
+    }
+
+    /**
+     * @param string $table
+     * @param array|null $columns
+     * @return Database
+     */
+    public function select(string $table, array $columns = null): Database
+    {
+
+        if (!$columns)
+        {
+            $fields = '*';
+        } else {
+            $fields = implode(', ', $columns);
+        }
+
+        $sql = "SELECT {$fields} FROM {$table} ";
+
+        $this->sql = $sql;
+
+        return $this;
+    }
+
+    /**
+     * @param string $table
+     * @return mixed
+     */
+    public function insert(string $table)
+    {
+        // TODO: Implement insert() method.
+    }
+
+    /**
+     * @param string $table
+     * @return mixed
+     */
+    public function update(string $table)
+    {
+        // TODO: Implement update() method.
+    }
+
+    /**
+     * @param string $table
+     * @return mixed
+     */
+    public function delete(string $table)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function all(): array
+    {
+        try {
+            $result = $this->databaseConnection->run($this->sql);
+            return $result->fetchAll();
+        } catch (Exception $e) {
+            $error = 'Erro: ' . $e->getMessage()
+                . '<br>'
+                . "SQL: {$this->sql}";
+            throw new Exception($error);
+        }
+    }
+
+    /**
+     * @param string $class
+     * @return mixed|void
+     * @throws Exception
+     */
+    public function first($class = null)
+    {
+        try {
+            $result = $this->databaseConnection->run($this->sql);
+
+            if (is_null($class))
+            {
+                return $result->fetch();
+            } else {
+                return $result->fetchObject($class);
+            }
+        } catch (Exception $e) {
+            $error = 'Erro: ' . $e->getMessage() . '<br>'
+                . "SQL: {$this->sql}";
+            throw new Exception($error);
+        }
+    }
+
+    /**
+     * @param $column
+     * @param $condition
+     * @param $value
+     * @return Database
+     */
+    public function where(string $column, string $condition, $value): Database
+    {
+        if (contains('WHERE', $this->sql))
+        {
+            $where = "AND ";
+        } else {
+            $where = "WHERE ";
+        }
+
+        if (is_string($value))
+        {
+            $value = "'{$value}'";
+        }
+
+        $where .= "{$column} {$condition} {$value} ";
+
+        $this->sql .= $where;
+
+        return $this;
     }
 }

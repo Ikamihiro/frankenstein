@@ -14,3 +14,25 @@ define('URL_SUB_FOLDER', str_replace(URL_PUBLIC_FOLDER, '', dirname($_SERVER['SC
 define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
 
 define('URL_BASE', URL);
+
+function debug($value, ...$values)
+{
+    var_dump($value, ...$values);
+    die();
+}
+
+function refreshArray(array $array): array
+{
+    $arrayRefreshed = array();
+
+    foreach ($array as $key => $value) {
+        $arrayRefreshed[$key] = $value;
+    }
+
+    return $arrayRefreshed;
+}
+
+function contains(string $needle, string $haystack): bool
+{
+    return strpos($haystack, $needle) !== false;
+}

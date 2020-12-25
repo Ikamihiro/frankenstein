@@ -4,6 +4,7 @@ namespace App\Lib\Utils;
 
 use App\Lib\Http\Session;
 use App\Models\User;
+use Exception;
 
 class Auth
 {
@@ -30,15 +31,26 @@ class Auth
         return self::$singleton;
     }
 
+    /**
+     * @param string $email
+     * @param string $password
+     * @return bool
+     * @throws Exception
+     */
     public function login(string $email, string $password): bool
     {
         try {
             $passwordHash = md5($password);
             $user = User::authenticate($email, $passwordHash);
-            $this->setUserInSession($user);
-            return $user ? true : false;
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+
+            if ($user) {
+                $this->setUserInSession($user);
+                return true;
+            }
+
+            return false;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -48,9 +60,9 @@ class Auth
         if (Session::get('isAuthenticated'))
         {
             Session::set('isAuthenticated', false);
-            Session::set('email', null);
-            Session::set('role', null);
-            Session::set('userJson', null);
+            Session::clear('email');
+            Session::clear('role');
+            Session::clear('userJson');
         }
 
         return true;
@@ -61,7 +73,7 @@ class Auth
         Session::init();
         if (!Session::get('isAuthenticated'))
         {
-            header('Location: ' . URL);
+            header('Location: ' . URL . 'login');
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Lib\Http\Controller;
 use App\Lib\Http\View;
+use App\Models\User;
 
 class HomeController extends Controller
 {
