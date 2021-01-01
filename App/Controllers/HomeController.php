@@ -21,11 +21,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $user = new User();
-        try {
-            $user->save();
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
+        $this->auth->lock();
+        $this->view('home');
     }
 }

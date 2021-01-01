@@ -46,18 +46,4 @@ class User extends Model
             throw new \Exception($e->getMessage());
         }
     }
-
-    /**
-     * @throws Exception
-     */
-    public function save()
-    {
-        try {
-            $database = Database::getInstance();
-            $result = $database->insert('users', ['email', 'password'], ['email@email.com', 123]);
-            echo $result->sql;
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
 }

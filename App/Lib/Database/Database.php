@@ -87,20 +87,7 @@ class Database implements DatabaseContract
             throw new Exception('Insert method without data');
         }
 
-        $values = '';
-        foreach ($data as $key => $value) {
-            if (is_string($value)) {
-                $valueFormated = "'{$value}'";
-            } else {
-                $valueFormated = $value;
-            }
-
-            if (array_key_last($data) == $key) {
-                $values .= "{$valueFormated}";
-            } else {
-                $values .= "{$valueFormated}, ";
-            }
-        }
+        $values = $this->formatDataToQuery($data);
 
         $sql .= "VALUES ({$values}) ";
         $this->sql = $sql;
@@ -110,20 +97,52 @@ class Database implements DatabaseContract
 
     /**
      * @param string $table
-     * @return mixed
+     * @param array|mixed $data
+     * @return Database|mixed
+     * @throws Exception
      */
-    public function update(string $table)
+    public function update(string $table, $data = null): Database
     {
-        // TODO: Implement update() method.
+        $sql = "UPDATE {$table} SET ";
+
+        if (!$data)
+        {
+            throw new Exception('Update method without data');
+        }
+
+        foreach ($data as $key => $value)
+        {
+            if (is_string($value))
+            {
+                $valueFormated = "'{$value}'";
+            } else {
+                $valueFormated = $value;
+            }
+
+            if (array_key_last($data) == $key)
+            {
+                $sql .= "{$key} = {$valueFormated} ";
+            }
+            else
+            {
+                $sql .= "{$key} = {$valueFormated}, ";
+            }
+        }
+
+        $this->sql = $sql;
+
+        return $this;
     }
 
     /**
      * @param string $table
-     * @return mixed
+     * @return Database|mixed
      */
-    public function delete(string $table)
+    public function delete(string $table): Database
     {
-        // TODO: Implement delete() method.
+        $sql = "DELETE FROM {$table} ";
+        $this->sql = $sql;
+        return $this;
     }
 
     /**
@@ -171,9 +190,15 @@ class Database implements DatabaseContract
      * @param $condition
      * @param $value
      * @return Database
+     * @throws Exception
      */
     public function where(string $column, string $condition, $value): Database
     {
+        if (empty($this->sql))
+        {
+            throw new Exception("Clause WHERE can't be single");
+        }
+
         if (contains('WHERE', $this->sql))
         {
             $where = "AND ";
@@ -191,5 +216,33 @@ class Database implements DatabaseContract
         $this->sql .= $where;
 
         return $this;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function formatDataToQuery(array $data): string
+    {
+        $values = '';
+
+        foreach ($data as $key => $value)
+        {
+            if (is_string($value))
+            {
+                $valueFormated = "'{$value}'";
+            } else {
+                $valueFormated = $value;
+            }
+
+            if (array_key_last($data) == $key)
+            {
+                $values .= "{$valueFormated}";
+            } else {
+                $values .= "{$valueFormated}, ";
+            }
+        }
+
+        return $values;
     }
 }

@@ -33,9 +33,10 @@ interface DatabaseContract
 
     /**
      * @param string $table
+     * @param array|mixed $data
      * @return mixed
      */
-    public function update(string $table);
+    public function update(string $table, $data = null);
 
     /**
      * @param string $table
