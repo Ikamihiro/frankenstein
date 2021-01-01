@@ -46,6 +46,39 @@ class Database implements DatabaseContract
     }
 
     /**
+     * @param $column
+     * @param $condition
+     * @param $value
+     * @return Database
+     * @throws Exception
+     */
+    public function where(string $column, string $condition, $value): Database
+    {
+        if (empty($this->sql))
+        {
+            throw new Exception("Clause WHERE can't be single");
+        }
+
+        if (contains('WHERE', $this->sql))
+        {
+            $where = "AND ";
+        } else {
+            $where = "WHERE ";
+        }
+
+        if (is_string($value))
+        {
+            $value = "'{$value}'";
+        }
+
+        $where .= "{$column} {$condition} {$value} ";
+
+        $this->sql .= $where;
+
+        return $this;
+    }
+
+    /**
      * @param string $table
      * @param array|null $columns
      * @return Database
@@ -186,39 +219,6 @@ class Database implements DatabaseContract
     }
 
     /**
-     * @param $column
-     * @param $condition
-     * @param $value
-     * @return Database
-     * @throws Exception
-     */
-    public function where(string $column, string $condition, $value): Database
-    {
-        if (empty($this->sql))
-        {
-            throw new Exception("Clause WHERE can't be single");
-        }
-
-        if (contains('WHERE', $this->sql))
-        {
-            $where = "AND ";
-        } else {
-            $where = "WHERE ";
-        }
-
-        if (is_string($value))
-        {
-            $value = "'{$value}'";
-        }
-
-        $where .= "{$column} {$condition} {$value} ";
-
-        $this->sql .= $where;
-
-        return $this;
-    }
-
-    /**
      * @param array $data
      * @return string
      */
@@ -244,5 +244,26 @@ class Database implements DatabaseContract
         }
 
         return $values;
+    }
+
+    /**
+     * @return bool|mixed
+     * @throws Exception
+     */
+    public function do(): bool
+    {
+        try {
+            $result = $this->databaseConnection->run($this->sql);
+
+            if ($result) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception $e) {
+            $error = "Erro: {$e->getMessage()} <br>"
+                . "SQL: {$this->sql}";
+            throw new Exception($error);
+        }
     }
 }

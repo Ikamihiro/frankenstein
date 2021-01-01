@@ -54,4 +54,9 @@ interface DatabaseContract
      * @return mixed
      */
     public function first($class = null);
+
+    /**
+     * @return mixed
+     */
+    public function do();
 }
