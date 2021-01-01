@@ -52,7 +52,6 @@ class Database implements DatabaseContract
      */
     public function select(string $table, array $columns = null): Database
     {
-
         if (!$columns)
         {
             $fields = '*';
@@ -69,11 +68,44 @@ class Database implements DatabaseContract
 
     /**
      * @param string $table
-     * @return mixed
+     * @param array|mixed $columns
+     * @param array|mixed $data
+     * @return Database|mixed
+     * @throws Exception
      */
-    public function insert(string $table)
+    public function insert(string $table, $columns = null, $data = null): Database
     {
-        // TODO: Implement insert() method.
+        $sql = "INSERT INTO {$table} ";
+
+        if ($columns) {
+            $fields = implode(', ', $columns);
+            $sql .= "({$fields}) ";
+        }
+
+        if (!$data)
+        {
+            throw new Exception('Insert method without data');
+        }
+
+        $values = '';
+        foreach ($data as $key => $value) {
+            if (is_string($value)) {
+                $valueFormated = "'{$value}'";
+            } else {
+                $valueFormated = $value;
+            }
+
+            if (array_key_last($data) == $key) {
+                $values .= "{$valueFormated}";
+            } else {
+                $values .= "{$valueFormated}, ";
+            }
+        }
+
+        $sql .= "VALUES ({$values}) ";
+        $this->sql = $sql;
+
+        return $this;
     }
 
     /**

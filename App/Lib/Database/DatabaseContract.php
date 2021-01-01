@@ -25,9 +25,11 @@ interface DatabaseContract
 
     /**
      * @param string $table
+     * @param array|mixed $columns
+     * @param array|mixed $data
      * @return mixed
      */
-    public function insert(string $table);
+    public function insert(string $table, $columns = null, $data = null);
 
     /**
      * @param string $table
