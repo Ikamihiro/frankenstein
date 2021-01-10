@@ -13,18 +13,13 @@ use App\Lib\Database\Database;
  */
 class User extends Model
 {
-    /**
-     * @return mixed
-     * @throws Exception
-     */
-    public static function all()
+    protected $primarykey = 'id';
+    protected $table = 'users';
+    protected $columns = ['email', 'password', 'role'];
+
+    public static function factory(): User
     {
-        try {
-            $database = Database::getInstance();
-            return $database->select('users')->all();
-        } catch (Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
+        return new self();
     }
 
     /**
@@ -33,12 +28,12 @@ class User extends Model
      * @return bool|User
      * @throws Exception
      */
-    public static function authenticate(string $email, string $password)
+    public function authenticate(string $email, string $password)
     {
         try {
             $database = Database::getInstance();
             return $database
-                ->select('users', null)
+                ->select($this->table, null)
                 ->where('email', '=', $email)
                 ->where('password', '=', $password)
                 ->first(User::class);

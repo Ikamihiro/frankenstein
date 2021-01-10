@@ -41,7 +41,7 @@ class Auth
     {
         try {
             $passwordHash = md5($password);
-            $user = User::authenticate($email, $passwordHash);
+            $user = User::factory()->authenticate($email, $passwordHash);
 
             if ($user) {
                 $this->setUserInSession($user);
