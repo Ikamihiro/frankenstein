@@ -266,4 +266,9 @@ class Database implements DatabaseContract
             throw new Exception($error);
         }
     }
+
+    public function lastIdInserted(): bool
+    {
+        return $this->databaseConnection->pdo->lastInsertId();
+    }
 }

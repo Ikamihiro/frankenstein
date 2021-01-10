@@ -59,4 +59,6 @@ interface DatabaseContract
      * @return mixed
      */
     public function do();
+
+    public function lastIdInserted();
 }
