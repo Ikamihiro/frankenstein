@@ -22,7 +22,7 @@
                             <a class="nav-link" href="<?php echo URL; ?>">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo URL . 'about'; ?>">Usuários</a>
+                            <a class="nav-link" href="<?php echo URL . 'admin/users'; ?>">Usuários</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-auto">
