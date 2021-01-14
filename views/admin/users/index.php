@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-auto">
                     <a href="<?php echo URL; ?>" class="btn btn-primary">
-                        Voltar p/ Home
+                        Back p/ Home
                     </a>
                 </div>
             </div>
@@ -22,13 +22,14 @@
             </div>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 p-3">
-            <table class="table table-striped">
+            <table class="table table-striped table-borderless">
                 <thead>
                     <tr>
                         <td>ID</td>
                         <td>Email</td>
                         <td>Role</td>
-                        <td></td>
+                        <td>Edit</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,8 @@
                                     <a class="btn btn-warning" href="<?php echo URL . 'admin/users/edit/' . $users->id; ?>">
                                         Edit
                                     </a>
+                                </td>
+                                <td>
                                     <form action="<?php echo URL . 'admin/users/delete/' . $users->id; ?>">
                                         <button type="submit" class="btn btn-danger">
                                             Delete

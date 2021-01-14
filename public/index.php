@@ -26,5 +26,6 @@ Macaw::get('/logout', 'App\Controllers\Auth\LoginController@logout');
 
 Macaw::get('/admin/users', 'App\Controllers\Auth\UserController@index');
 Macaw::get('/admin/users/create', 'App\Controllers\Auth\UserController@create');
+Macaw::post('/admin/users/store', 'App\Controllers\Auth\UserController@store');
 
 Macaw::dispatch();

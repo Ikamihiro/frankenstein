@@ -15,6 +15,17 @@ class Model implements ModelContract
     protected $columns = [];
     protected $attributes = [];
 
+    public function __construct($attributes = array())
+    {
+        if(!empty($attributes))
+        {
+            foreach ($attributes as $key => $value)
+            {
+                $this->{$key} = $value;
+            }
+        }
+    }
+
     /**
      * @param $name
      * @param $value
@@ -32,7 +43,12 @@ class Model implements ModelContract
      */
     public function __get($name)
     {
-        return $this->attributes[$name];
+        if (isset($this->attributes[$name]))
+        {
+            return $this->attributes[$name];
+        }
+
+        return null;
     }
 
     /**

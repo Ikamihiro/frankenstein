@@ -17,6 +17,12 @@ class User extends Model
     protected $table = 'users';
     protected $columns = ['email', 'password', 'role'];
 
+    public function __construct($attributes = array())
+    {
+        parent::__construct($attributes);
+        $this->password = md5($this->password);
+    }
+
     public static function factory(): User
     {
         return new self();

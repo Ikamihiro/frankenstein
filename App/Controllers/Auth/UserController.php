@@ -3,6 +3,7 @@
 namespace App\Controllers\Auth;
 
 use App\Lib\Http\Controller;
+use App\Lib\Utils\Validator;
 use App\Models\User;
 use Exception;
 
@@ -35,7 +36,31 @@ class UserController extends Controller
 
     public function store()
     {
+        $request = $this->request->getBody();
 
+        $result = Validator::validateAll($request, [
+            'email' => 'required|max:250',
+            'password' => 'required',
+            'role' => 'required'
+        ]);
+
+        if (!$result)
+        {
+            $this->view('admin/users/create', [
+                'erros' => Validator::$erros,
+            ]);
+            return;
+        }
+
+        $user = new User($request);
+
+        try {
+            if ($user->save()) {
+                $this->redirect('admin/users', ['success' => 'Users saved successfully']);
+            }
+        } catch (Exception $e) {
+            $this->redirect('admin/users', ['error' => 'A error happened']);
+        }
     }
 
     public function edit($id)
