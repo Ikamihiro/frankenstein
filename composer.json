@@ -1,0 +1,16 @@
+{
+    "name": "joao/csc-one",
+    "authors": [
+        {
+            "name": "João G. Silva",
+            "email": "joogabrielsntn66@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Lib\\": "lib/"
+        }
+    },
+    "require": {}
+}
