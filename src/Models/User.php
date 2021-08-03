@@ -24,4 +24,9 @@ class User extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
+    }
 }
