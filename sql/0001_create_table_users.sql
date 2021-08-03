@@ -8,4 +8,5 @@ CREATE TABLE IF NOT EXISTS `users` (
     `created_at` TIMESTAMP NOT NULL,
     `updated_at` TIMESTAMP NOT NULL,
     `deleted_at` TIMESTAMP NULL
+    -- CONSTRAINT `uc_document` UNIQUE (`document`)
 ) ENGINE = InnoDB;

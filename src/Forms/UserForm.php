@@ -10,12 +10,11 @@ class UserForm extends Form
     public static function create(array $data)
     {
         $rules = [
-            'post_code' => [new RequiredRule],
-            'street' => [new RequiredRule],
-            'neighborhood' => [new RequiredRule],
-            'city' => [new RequiredRule],
-            'state' => [new RequiredRule],
-            'user_id' => [new RequiredRule],
+            'first_name' => [new RequiredRule],
+            'last_name' => [new RequiredRule],
+            'phone' => [new RequiredRule],
+            'document' => [new RequiredRule],
+            'birth_date' => [new RequiredRule],
         ];
 
         return new self($data, $rules);
