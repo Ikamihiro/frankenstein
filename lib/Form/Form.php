@@ -25,12 +25,20 @@ class Form
         $result = true;
 
         /**
-         * @var Rule $rule
+         * @var Rule[] $rules
          */
-        foreach ($this->rules as $field => $rule) {
+        foreach ($this->rules as $field => $rules) {
             $valueField = $this->data[$field];
-            $result = $rule->validate($valueField);
-            $this->setError($field, $rule->getError());
+            $errors = [];
+
+            foreach ($rules as $rule) {
+                if (!$rule->validate($valueField)) {
+                    $result = false;
+                    $errors[] = $rule->getError();
+                }
+            }
+
+            $this->setErrors($field, $errors);
         }
 
         return $result;
@@ -41,8 +49,8 @@ class Form
         return $this->errors;
     }
 
-    public function setError(string $field, string $error)
+    public function setErrors(string $field, array $errors)
     {
-        $this->errors[$field] = $error;
+        $this->errors[$field] = $errors;
     }
 }

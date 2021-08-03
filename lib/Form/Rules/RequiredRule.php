@@ -11,7 +11,7 @@ class RequiredRule extends Rule
         $validation = isset($field);
 
         if (!$validation) {
-            $this->setError("Value can't be null!");
+            $this->setError("Value cannot be null!");
         }
 
         return $validation;

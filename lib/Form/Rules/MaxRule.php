@@ -8,10 +8,23 @@ class MaxRule extends Rule
 {
     public function validate($field, int $max = 250): bool
     {
-        if (is_string($field)) {
-            return strlen($field) <= $max;
+        if (!$field) {
+            $this->setError("Value cannot be longer than $max characters");
+            return false;
         }
 
-        return count($field) <= $max;
+        $validation = true;
+
+        if (is_string($field)) {
+            $validation = strlen($field) <= $max;
+        } else {
+            $validation = count($field) <= $max;
+        }
+
+        if (!$validation) {
+            $this->setError("Value cannot be longer than $max characters");
+        }
+
+        return $validation;
     }
 }

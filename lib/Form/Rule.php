@@ -8,7 +8,7 @@ class Rule
 
     public function getError(): string
     {
-        return $this->error ? $this->error : 'No error';
+        return isset($this->error) ? $this->error : 'No error';
     }
 
     public function setError(string $error): void

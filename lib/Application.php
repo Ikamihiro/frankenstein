@@ -41,7 +41,7 @@ class Application
 
             echo call_user_func($callback, $this->request, $this->response, ...$this->router->getParams());
         } catch (\Throwable $th) {
-            echo $this->response->json($th->getMessage(), 404);
+            echo $this->response->json($th->getMessage(), 500);
             die();
         }
     }
