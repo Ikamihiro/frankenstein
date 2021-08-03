@@ -2,6 +2,9 @@
 
 namespace Lib;
 
+use Lib\Http\Request;
+use Lib\Http\Response;
+
 class Application
 {
     public Request $request;
@@ -27,6 +30,9 @@ class Application
             }
 
             if (is_array($callback)) {
+                /**
+                 * @var \Lib\Controller controller
+                 */
                 $controller = new $callback[0];
                 $controller->action = $callback[1];
                 $this->controller = $controller;

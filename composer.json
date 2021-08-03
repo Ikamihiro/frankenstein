@@ -12,5 +12,7 @@
             "Lib\\": "lib/"
         }
     },
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    }
 }
