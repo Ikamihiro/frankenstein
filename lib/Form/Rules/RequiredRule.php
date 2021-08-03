@@ -8,6 +8,12 @@ class RequiredRule extends Rule
 {
     public function validate($field): bool
     {
-        return isset($field);
+        $validation = isset($field);
+
+        if (!$validation) {
+            $this->setError("Value can't be null!");
+        }
+
+        return $validation;
     }
 }

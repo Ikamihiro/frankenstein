@@ -15,7 +15,7 @@ class Form
         $this->errors = [];
     }
 
-    public function create(array $rules, array $data)
+    public static function create(array $rules, array $data)
     {
         return new self($data, $rules);
     }
@@ -30,13 +30,19 @@ class Form
         foreach ($this->rules as $field => $rule) {
             $valueField = $this->data[$field];
             $result = $rule->validate($valueField);
-
-            if ($result) {
-                $this->errors[] = $rule->getError();
-                $result = false;
-            }
+            $this->setError($field, $rule->getError());
         }
 
         return $result;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    public function setError(string $field, string $error)
+    {
+        $this->errors[$field] = $error;
     }
 }

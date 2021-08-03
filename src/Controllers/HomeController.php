@@ -3,8 +3,7 @@
 namespace App\Controllers;
 
 use Lib\Controller;
-use Lib\Request;
-use Lib\Response;
+use Lib\Http\{Request, Response};
 
 class HomeController extends Controller
 {
