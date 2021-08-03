@@ -9,9 +9,8 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../config/env.php';
 require __DIR__ . '/../config/database.php';
 
-use App\Controllers\AddressController;
 use App\Controllers\HomeController;
-use App\Controllers\UserController;
+use App\Controllers\Api\{AddressController, UserController};
 use Lib\Application;
 
 $app = new Application();
