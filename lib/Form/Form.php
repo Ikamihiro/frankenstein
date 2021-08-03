@@ -15,11 +15,6 @@ class Form
         $this->errors = [];
     }
 
-    public static function create(array $rules, array $data)
-    {
-        return new self($data, $rules);
-    }
-
     public function validate(): bool
     {
         $result = true;
