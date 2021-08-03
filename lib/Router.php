@@ -42,7 +42,7 @@ class Router
 
     public function getParams()
     {
-        return array_slice($this->params, 1);
+        return $this->params ? array_slice($this->params, 1) : [];
     }
 
     public function getRoute()
