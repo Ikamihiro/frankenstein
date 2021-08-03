@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\Address;
 use Lib\Controller;
 use Lib\Http\{Request, Response};
 
 class AddressController extends Controller
 {
-    public function index(Request $request, Response $response)
+    public function index(Request $request, Response $response, int $userId)
     {
-        return $response->json('Index');
+        $addresses = Address::where('user_id', $userId)->get();
+
+        return $response->json($addresses);
     }
 
     public function create(Request $request, Response $response)
