@@ -1,14 +1,17 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    echo 'Error Autoload';
+    exit(1);
+}
 
-use Dotenv\Dotenv;
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../config/env.php';
+require __DIR__ . '/../config/database.php';
+
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use Lib\Application;
-
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
 
 $app = new Application();
 

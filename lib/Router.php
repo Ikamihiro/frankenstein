@@ -50,8 +50,8 @@ class Router
         $method = $this->request->getMethod();
         $url = $this->request->getUrl();
 
-        if (isset($this->routes[$this->method][$this->path])) {
-            return $this->routes[$this->method][$this->path];
+        if (isset($this->routes[$method][$url])) {
+            return $this->routes[$method][$url];
         }
 
         foreach ($this->routes[$method] as $route => $action) {
