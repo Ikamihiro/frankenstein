@@ -24,4 +24,11 @@ class Response
 
         return json_encode($data);
     }
+
+    public function noContent()
+    {
+        $this->setStatusCode(204);
+
+        header('Content-Type: application/json');
+    }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Forms\UserForm;
 use App\Models\User;
 use Lib\Controller;
-use Lib\Form\Form;
-use Lib\Form\Rules\MaxRule;
-use Lib\Form\Rules\RequiredRule;
 use Lib\Http\{Request, Response};
 
 class UserController extends Controller
@@ -20,13 +18,7 @@ class UserController extends Controller
 
     public function create(Request $request, Response $response)
     {
-        $form = Form::create([
-            'first_name' => [new RequiredRule()],
-            'last_name' => [new RequiredRule()],
-            'phone' => [new RequiredRule()],
-            'document' => [new RequiredRule()],
-            'birth_date' => [new RequiredRule()],
-        ], $request->getFormJSON());
+        $form = UserForm::create($request->getFormJSON());
 
         if (!$form->validate()) {
             return $response->json([
@@ -37,5 +29,31 @@ class UserController extends Controller
         $user = User::create($request->getFormJSON());
 
         return $response->json($user);
+    }
+
+    public function update(Request $request, Response $response, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $form = UserForm::create($request->getFormJSON());
+
+        if (!$form->validate()) {
+            return $response->json([
+                $form->getErrors(),
+            ], 400);
+        }
+
+        $user->update($request->getFormJSON());
+
+        return $response->json($user);
+    }
+
+    public function delete(Request $request, Response $response, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return $response->noContent();
     }
 }
