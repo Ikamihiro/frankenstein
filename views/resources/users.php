@@ -12,6 +12,9 @@
                     <div id="formUserCollapse" class="accordion-collapse collapse" aria-labelledby="formUserHead" data-bs-parent="#accordionUser">
                         <div class="accordion-body">
                             <form id="formUser">
+                                <input type="hidden" id="action" value="create">
+                                <input type="hidden" id="userId">
+
                                 <div class="mb-3">
                                     <label for="document" class="form-label">CPF</label>
                                     <input type="text" class="form-control" id="document" required>
@@ -83,6 +86,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     function setUserAtForm(user) {
+        $("#action").val('update');
+        $("#userId").val(user.id);
         $("#document").val(user.document);
         $("#firstName").val(user.first_name);
         $("#lastName").val(user.last_name);
@@ -96,6 +101,15 @@
     $("#formUser").on('submit', function(e) {
         e.preventDefault();
 
+        let action = $("#action").val() == 'create' ?
+            'POST' :
+            'PUT';
+        let url = $("#action").val() == 'create' ?
+            '/api/user' :
+            '/api/user/' + $("#userId").val();
+
+        console.log(action, url);
+
         let newUser = {
             document: $("#document").val(),
             first_name: $("#firstName").val(),
@@ -105,8 +119,8 @@
         };
 
         $.ajax({
-            url: '/api/user',
-            type: 'POST',
+            url: url,
+            type: action,
             dataType: 'JSON',
             data: JSON.stringify(newUser),
             success: (data, textStatus, jqxhr) => {
