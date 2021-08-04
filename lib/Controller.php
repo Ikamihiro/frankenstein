@@ -11,7 +11,7 @@ class Controller
         $this->view = View::getInstance();
     }
 
-    public function view($view, array $params)
+    public function view($view, $params = [])
     {
         return $this->view->render($view, $params);
     }
