@@ -25,7 +25,9 @@ class Application
             $callback = $this->router->getRoute();
 
             if (!$callback) {
-                echo $this->response->json('Not found', 404);
+                echo $this->response->json([
+                    'error' => 'Not found',
+                ], 404);
                 die();
             }
 
@@ -41,7 +43,10 @@ class Application
 
             echo call_user_func($callback, $this->request, $this->response, ...$this->router->getParams());
         } catch (\Throwable $th) {
-            echo $this->response->json($th->getMessage(), 500);
+            echo $this->response->json([
+                // 'exception' => get_class($th), REQUER TESTE
+                'error' => $th->getMessage(),
+            ], 500);
             die();
         }
     }

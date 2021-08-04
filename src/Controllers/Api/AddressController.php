@@ -22,7 +22,7 @@ class AddressController extends Controller
 
         if (!$form->validate()) {
             return $response->json([
-                $form->getErrors(),
+                'errors' => $form->getErrors(),
             ], 400);
         }
 
@@ -39,7 +39,7 @@ class AddressController extends Controller
 
         if (!$form->validate()) {
             return $response->json([
-                $form->getErrors(),
+                'errors' => $form->getErrors(),
             ], 400);
         }
 
