@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index(Request $request, Response $response)
     {
-        return $response->json('Hello Word');
+        return $this->view('home', []);
     }
 
     public function hello(Request $request, Response $response, string $name)
