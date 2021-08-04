@@ -28,6 +28,10 @@
                                     <input type="text" class="form-control" id="lastName" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
                                     <label for="phone" class="form-label">Telefone</label>
                                     <input type="text" class="form-control" id="phone" required>
                                 </div>
@@ -54,7 +58,9 @@
                         <th scope="col">CPF</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Sobrenome</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Telefone</th>
+                        <th scope="col">Data de nascimento</th>
                         <th width="150" scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -65,7 +71,9 @@
                             <td><?php echo $user->document; ?></td>
                             <td><?php echo $user->first_name; ?></td>
                             <td><?php echo $user->last_name; ?></td>
+                            <td><?php echo $user->email; ?></td>
                             <td><?php echo $user->phone; ?></td>
+                            <td><?php echo $user->birth_date; ?></td>
                             <td>
                                 <button class="btn btn-sm btn-warning text-dark mx-1 editButton" data-id="<?php echo $user->id; ?>">
                                     Editar
@@ -91,6 +99,7 @@
         $("#document").val(user.document);
         $("#firstName").val(user.first_name);
         $("#lastName").val(user.last_name);
+        $("#email").val(user.email);
         $("#phone").val(user.phone);
         $("#birthDate").val(user.birth_date);
 
@@ -114,6 +123,7 @@
             document: $("#document").val(),
             first_name: $("#firstName").val(),
             last_name: $("#lastName").val(),
+            email: $("#email").val(),
             phone: $("#phone").val(),
             birth_date: $("#birthDate").val(),
         };
