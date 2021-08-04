@@ -19,7 +19,8 @@ composer install && composer dumpautoload
 ```
 
 #### 3. **Crie um banco de dados**
-Crie um banco de dados com o **charset UTF-8** no MySQL com o nome de sua preferência e preencha as variáveis de ambiente conforme abaixo:
+Crie um banco de dados com o **charset UTF-8** no MySQL com o nome de sua preferência.
+Copie o arquivo ```.env.example``` com o nome ```.env``` e preencha as variáveis de ambiente conforme abaixo:
 ```
 BASE_URL=http://127.0.0.1:3456
 
