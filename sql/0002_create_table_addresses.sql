@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
     `neighborhood` VARCHAR(250) NOT NULL,
     `city` VARCHAR(250) NOT NULL,
     `state` VARCHAR(250) NOT NULL,
+    `type` VARCHAR(250) NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `created_at` TIMESTAMP NOT NULL,
     `updated_at` TIMESTAMP NOT NULL,

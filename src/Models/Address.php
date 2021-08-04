@@ -17,6 +17,7 @@ class Address extends Model
         'neighborhood',
         'city',
         'state',
+        'type',
         'user_id',
     ];
 

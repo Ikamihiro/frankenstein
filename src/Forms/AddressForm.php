@@ -15,6 +15,7 @@ class AddressForm extends Form
             'neighborhood' => [new RequiredRule],
             'city' => [new RequiredRule],
             'state' => [new RequiredRule],
+            'type' => [new RequiredRule],
             'user_id' => [new RequiredRule],
         ];
 
