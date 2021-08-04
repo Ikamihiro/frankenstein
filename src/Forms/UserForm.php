@@ -12,6 +12,7 @@ class UserForm extends Form
         $rules = [
             'first_name' => [new RequiredRule],
             'last_name' => [new RequiredRule],
+            'email' => [new RequiredRule],
             'phone' => [new RequiredRule],
             'document' => [new RequiredRule],
             'birth_date' => [new RequiredRule],
