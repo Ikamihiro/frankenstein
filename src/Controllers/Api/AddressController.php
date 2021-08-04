@@ -16,6 +16,13 @@ class AddressController extends Controller
         return $response->json($addresses);
     }
 
+    public function show(Request $request, Response $response, int $id)
+    {
+        $user = Address::findOrFail($id);
+
+        return $response->json($user);
+    }
+
     public function create(Request $request, Response $response)
     {
         $form = AddressForm::create($request->getFormJSON());

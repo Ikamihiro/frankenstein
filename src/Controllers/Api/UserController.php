@@ -16,6 +16,13 @@ class UserController extends Controller
         return $response->json($users);
     }
 
+    public function show(Request $request, Response $response, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        return $response->json($user);
+    }
+
     public function create(Request $request, Response $response)
     {
         $form = UserForm::create($request->getFormJSON());
