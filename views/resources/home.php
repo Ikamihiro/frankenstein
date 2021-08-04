@@ -1,7 +1,35 @@
-<div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Custom jumbotron</h1>
-        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-        <button class="btn btn-primary btn-lg" type="button">Example button</button>
+<div class="p-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        CSC Desafio
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Página dos Usuários:
+                            <a href="/users" class="btn btn-sm btn-primary">
+                                Acessar
+                            </a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Página dos Endereços:
+                            <a href="/addresses" class="btn btn-sm btn-primary">
+                                Acessar
+                            </a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Link p/ código GitHub:
+                            <a href="https://github.com/Ikamihiro/csc-one" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                                Acessar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
