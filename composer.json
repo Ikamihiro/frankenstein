@@ -15,6 +15,7 @@
     "require": {
         "vlucas/phpdotenv": "^5.3",
         "illuminate/database": "^8.52",
-        "nesbot/carbon": "^2.51"
+        "nesbot/carbon": "^2.51",
+        "ikamihiro/frankenstein-core": "^1.0"
     }
 }

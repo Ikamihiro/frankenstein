@@ -4,8 +4,9 @@ namespace App\Controllers\Api;
 
 use App\Forms\UserForm;
 use App\Models\User;
-use Lib\Controller;
-use Lib\Http\{Request, Response};
+use Frankenstein\Http\Controller;
+use Frankenstein\Http\Request;
+use Frankenstein\Http\Response;
 
 class UserController extends Controller
 {

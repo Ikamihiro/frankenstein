@@ -2,13 +2,16 @@
 
 namespace App\Controllers;
 
-use Lib\Controller;
-use Lib\Http\{Request, Response};
+use Frankenstein\Http\Controller;
+use Frankenstein\Http\Request;
+use Frankenstein\Http\Response;
 
 class HomeController extends Controller
 {
     public function index(Request $request, Response $response)
     {
-        return $this->view('home');
+        return $response->json([
+            'data' => 'Hello World!',
+        ]);
     }
 }

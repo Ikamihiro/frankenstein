@@ -2,8 +2,8 @@
 
 namespace App\Forms;
 
-use Lib\Form\Form;
-use Lib\Form\Rules\RequiredRule;
+use Frankenstein\Validation\Form;
+use Frankenstein\Validation\Rules\RequiredRule;
 
 class AddressForm extends Form
 {

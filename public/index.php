@@ -12,7 +12,7 @@ require __DIR__ . '/../config/database.php';
 use App\Controllers\HomeController;
 use App\Controllers\Api\{AddressController, UserController};
 use App\Controllers\UsersController;
-use Lib\Application;
+use Frankenstein\Application;
 
 $app = new Application();
 
