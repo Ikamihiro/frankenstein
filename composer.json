@@ -1,5 +1,7 @@
 {
     "name": "ikamihiro/frankenstein-framerwork",
+    "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "João G. Silva",
