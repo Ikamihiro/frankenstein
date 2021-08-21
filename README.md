@@ -1,4 +1,4 @@
-# CSC One
+# Frankenstein Miniframework
 
 ### Requisitos
 * **PHP 7.4+**
