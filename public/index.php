@@ -11,7 +11,6 @@ require __DIR__ . '/../config/database.php';
 
 use App\Controllers\HomeController;
 use App\Controllers\Api\{AddressController, UserController};
-use App\Controllers\UsersController;
 use Frankenstein\Application;
 
 $app = new Application();
@@ -30,7 +29,5 @@ $app->router->get('/api/address/{id}', [UserController::class, 'show']);
 $app->router->post('/api/address', [AddressController::class, 'create']);
 $app->router->put('/api/address/{id}', [AddressController::class, 'update']);
 $app->router->delete('/api/address/{id}', [AddressController::class, 'delete']);
-
-$app->router->get('/users', [UsersController::class, 'index']);
 
 $app->run();
