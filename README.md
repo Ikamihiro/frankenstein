@@ -9,16 +9,10 @@
 
 #### 1. **Clone o projeto**
 ```
-git clone https://github.com/Ikamihiro/csc-one
+composer create-project ikamihiro/frankenstein-framework test
 ```
 
-#### 2. **Instale as dependências**
-Navegue pelo terminal até a pasta do projeto e execute os comandos abaixos:
-```
-composer install && composer dumpautoload
-```
-
-#### 3. **Crie um banco de dados**
+#### 2. **Crie um banco de dados**
 Crie um banco de dados com o **charset UTF-8** no MySQL com o nome de sua preferência.
 Copie o arquivo ```.env.example``` com o nome ```.env``` e preencha as variáveis de ambiente conforme abaixo:
 ```
@@ -33,7 +27,7 @@ DB_USER=<usuario-do-seu-banco>
 DB_PASS=<senha-do-seu-usuario>
 ```
 
-#### 4. **Criando as tabelas**
+#### 3. **Criando as tabelas**
 Após o passo anterior, crie as tabelas necessárias com os códigos SQL dentro da pasta ```sql/```. **Respeite a ordem dos códigos**.
 
 ### Executando o projeto
